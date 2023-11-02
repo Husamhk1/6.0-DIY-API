@@ -115,9 +115,9 @@ app.delete("/jokes/:id", (req, res) =>{
 
   if(jokeIndex <= jokes.length && jokeIndex >= 0){
     jokes.splice(jokeIndex,1);
-    /*res.json({Delete:"The Element is deleted",
+    res.json({Delete:"The Element is deleted",
     DeletedJoke:jokes[jokeIndex]});  
-    console.log("The Element is deleted");*/
+    console.log("The Element is deleted");
     res.sendStatus(200);
   } else {
     res
@@ -128,13 +128,12 @@ app.delete("/jokes/:id", (req, res) =>{
  
 });
 //8. DELETE All jokes
-app.delete("/jokes/deleteAll", (req, res) =>{
+app.delete("/deleteAll", (req, res) =>{
   const jokesSize = jokes.length-1;
 
-  if(jokesSize > 0){
-    jokes.pop();
-    res.json({Delete:"The all of jokes is deleted",
-    DeletedJoke:jokes});  
+  if( masterKey === req.query.apiKey){
+    jokes.splice(0,jokes.length);
+    res.json({Delete:"The all of jokes is deleted"});  
     console.log("The all of jokes is deleted");
 
   }else{
